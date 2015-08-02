@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>[D3] Colorfull Div Elements</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+	</head>
+	<body>
+
+		<div>First Div </div>
+		<div>Second Div </div>
+		<div>Third Div </div>
+		<div>Fourth Div </div>
+		<div>Fifth Div </div>
+		<div>Sixth Div </div>
+		<div>Seventh Div </div>
+		<div>Eighth Div </div>
+		<div>Ninth Div </div>
+	
+		<!-- Keep the code at the end of file. All DOM elements must be ready before script runs -->	
+		<script>
+			//First div is colored red, Second div is colored green and third div is colored blue.
+			//After the third div same pattern is repeated.
+
+			d3.selectAll('body div').style('background-color',function(d,i){
+				if(i%3 == 0){
+					return 'red';
+				}
+				else if(i%3 == 1){
+					return 'green';
+				}
+				else{
+					return 'blue';
+				}
+			});
+		</script>
+	</body>
+</html>

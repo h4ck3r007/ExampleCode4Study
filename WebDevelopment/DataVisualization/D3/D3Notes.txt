@@ -1,0 +1,19 @@
+D3 : Data Driven Documents
+
+Introduction
+============
+
+D3 is "Data-Driven Documents" is library developed by "Mike Bostock" for manipulating the documents based on data. D3 works with the DOM elements. D3 does not go away from DOM manipulation like other graphics library, so D3 works well with CSS and SVG.
+
+If you are looking for having more control over visulization of data then this is right tool but if you are just looking for displaying data and do not want to control the visualization part there are many ready meade library that can make life simpler. Such libraries are HighCharts, charts.js or Google Charts API.
+
+Hello World Code
+================
+
+Using D3 it is easy to create an element in DOM and adding the attribute to it. Here is simple code to add and H1 element having text "Hello World".
+
+<code>
+	d3.select('body').append('h1').text('Hello World!')
+</code>
+
+
