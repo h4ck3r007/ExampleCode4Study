@@ -17,3 +17,61 @@ Using D3 it is easy to create an element in DOM and adding the attribute to it. 
 </code>
 
 
+Selection and Data Binding
+===========================
+D3 supports different selectors to select the DOM elements and then those selected elements can be used to apply the CSS properties. 
+
+Here is a way to select all div elements from DOM and mark them blue in color.
+
+<code>
+	d3.selectAll('div').style('background-color','blue');
+</code>
+
+D3 allows to run the function for each selection in DOM and based on the value apply the CSS property value.
+
+<code>
+	d3.selectAll('div').style('background-color, function(d,i){ if(i%2==0) {
+		return 'blue';
+	}else{
+		return 'green';
+	}
+	});
+</code>
+
+Elements seleceted from DOM can be binded to data to draw the charts using D3. To bind the data with the selection D3 has function named "data".
+
+To bind the data in array [10,20,30] to three div elements in DOM
+
+<code>
+	d3.selectAll('div').data([10,20,30]).style('width',function(d,i){ return d+'%';});
+</code>
+
+
+To create or remove the DOM elements dynamically based on data set D3 provides the enter and exit methods.
+
+Here is the code to create the DIV elements dynamically based on data.
+
+<code>
+	var data =[10,20,30,40];
+	d3.select('body').selectAll('.bar').data(data).enter().append('div').style('width',function(d,i){return d+'%';}).attr('class','bar');
+</code>
+
+
+
+SVG Basics
+==========
+
+SVG has following tags to create circle, rectangle & line.
+
+circle : to draw circle
+rect : to draw rectange
+line : to draw lines
+path : to draw contineous line
+
+Code to draw circle using SVG.
+
+<code>
+	<circle cx='100' cy='100' r='50'/>
+</code>
+
+

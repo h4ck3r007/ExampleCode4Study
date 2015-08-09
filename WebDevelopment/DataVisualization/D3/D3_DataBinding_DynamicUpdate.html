@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<title>[D3] Random Graph</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+		<style>
+			.bar{
+				height:2px;
+				background-color:blue;
+				border-bottom: 1px solid white;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			var bars = d3.select('body').selectAll('bar');
+
+			function update(){
+				var n = Math.round(Math.random() * 100);
+				var data = d3.range(n);
+				bars = bars.data(data);
+
+				bars.enter().append('div').attr('class','bar');
+				bars.exit().remove();
+				bars.style('width',function(d){ return d +'%';}).style('height',400/n +'px');
+			};
+
+			setInterval(update,1000);
+
+		</script>
+	</body>
+</html>

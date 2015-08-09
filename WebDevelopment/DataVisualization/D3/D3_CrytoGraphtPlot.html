@@ -1,0 +1,77 @@
+<html>
+	<head>
+		<title>[D3] Letter Frequency In English </title>
+		<script src="d3.min.js" charset="utf-8"></script>
+	</head>
+	<body>
+		<script>
+			var data = [{"letter":"A","frequency":0.08167},{"letter":"B","frequency":0.01492},{"letter":"C","frequency":0.02782},{"letter":"D","frequency":0.04253},{"letter":"E","frequency":0.12702},{"letter":"F","frequency":0.02288},{"letter":"G","frequency":0.02015},{"letter":"H","frequency":0.06094},{"letter":"I","frequency":0.06966},{"letter":"J","frequency":0.00153},{"letter":"K","frequency":0.00772},{"letter":"L","frequency":0.04025},{"letter":"M","frequency":0.02406},{"letter":"N","frequency":0.06749},{"letter":"O","frequency":0.07507},{"letter":"P","frequency":0.01929},{"letter":"Q","frequency":0.00095},{"letter":"R","frequency":0.05987},{"letter":"S","frequency":0.06327},{"letter":"T","frequency":0.09056},{"letter":"U","frequency":0.02758},{"letter":"V","frequency":0.00978},{"letter":"W","frequency":0.0236},{"letter":"X","frequency":0.0015},{"letter":"Y","frequency":0.01974},{"letter":"Z","frequency":0.00074}];
+
+			var height = 500;
+			var width = 960;
+			var margin = 40;
+
+			//Create the SVG Chart Area
+			var svg = d3.select('body').append('svg');
+			
+			//Set the height and width for chart
+			svg.attr('height',height);
+			svg.attr('width',width);;
+
+			//Bind data
+			//Add the circle for each data point
+			var chart = svg.selectAll('circle').data(data).enter().append('circle');
+
+			//Find x_extent
+			var x_extent = d3.extent(data,function(d){return d.letter.charCodeAt(0)-64});
+
+			//Find y_extent
+			var y_extent = d3.extent(data,function(d){return d.frequency*100});
+	
+			//Build X Scale
+			var x_scale = d3.scale.linear().range([margin,width-margin]).domain(x_extent);	
+			
+			//Build Y Scale
+			var y_scale = d3.scale.linear().range([height-margin,margin]).domain(y_extent);
+
+			//Draw circle
+			d3.selectAll('circle')
+				.attr('cx',function(d){return x_scale(d.letter.charCodeAt(0)-64)})
+				.attr('cy',function(d){return y_scale(d.frequency*100)})
+				.attr('r',5);
+
+			//Add X Axis
+			var x_axis = d3.svg.axis().scale(x_scale);
+			
+			d3.select('svg')
+				.append('g')
+				.attr('class','xaxis')
+				.attr('transform','translate(0,'+(height-margin)+')')
+				.call(x_axis);
+			
+			//Add Y Axis
+			var y_axis = d3.svg.axis().scale(y_scale).orient('left').ticks(12,'%');
+
+			d3.select('svg')
+				.append('g')
+				.attr('class','yaxis')
+				.attr('transform','translate('+margin+',0)')
+				.call(y_axis);		
+
+			//Add X Axis title
+			d3.select('.xaxis')
+				.append('text')
+				.text('Letters in English Language')
+				.attr('x',width/2 - margin)
+				.attr('y',margin/1.1)
+
+			//Add Y Axis title
+			d3.select('.yaxis')
+				.append('text')
+				.text('Letter Frequency In Percentage')
+				.attr('transform','rotate(-90 -25 0) translate(-400)');
+			
+		</script>
+
+	</body>
+</html>
